@@ -1,8 +1,9 @@
 #!/bin/sh
-mkdir /images
+mkdir -p /images
 cd /images
 
-if [ -n "$REGISTRY_USER" && -n "$REGISTRY_PASS" ]; then
+if [ -n "$REGISTRY_USER" -a -n "$REGISTRY_PASS" ]
+then
 	# Login to registry
 	docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS" "$REGISTRY_HOST"
 fi
