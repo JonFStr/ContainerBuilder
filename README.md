@@ -21,11 +21,11 @@ cp crontab.dist crontab
 
 The following environment variables can be used to configure the script:
 
-| Variable | Description |
-| -------- | ------- |
+| Variable        | Description                                                                    |
+|-----------------|--------------------------------------------------------------------------------|
 | `REGISTRY_HOST` | Domain of the registry to publish images to. If empty, will not perform a push |
-| `REGISTRY_USER` | Username to authenticate against the given registry. |
-| `REGISTRY_PASS  | Password to authenticate against the given registry. |
+| `REGISTRY_USER` | Username to authenticate against the given registry.                           |
+| `REGISTRY_PASS  | Password to authenticate against the given registry.                           |
 
 ## Execution
 A sample `docker-compose.yml` is provided in this repository.
