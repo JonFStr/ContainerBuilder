@@ -1,0 +1,14 @@
+services:
+  builder:
+    image: docker:cli
+    restart: always
+    environment:
+      REGISTRY_HOST:
+      REGISTRY_USER:
+      REGISTRY_PASS:
+    volumes:
+      - ./images:/images
+      - ./crontab:/var/spool/cron/crontabs/root
+      - ./builder.sh:/builder.sh
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: "crond -f -l 2"

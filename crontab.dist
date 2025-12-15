@@ -1,0 +1,2 @@
+# Run every day at 23:30
+30 23 * * * /builder.sh
