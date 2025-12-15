@@ -7,8 +7,8 @@ services:
       REGISTRY_USER:
       REGISTRY_PASS:
     volumes:
-      - ./images:/images
-      - ./crontab:/var/spool/cron/crontabs/root
-      - ./builder.sh:/builder.sh
+      - ./images:/images:ro
+      - ./crontab:/var/spool/cron/crontabs/root:ro
+      - ./builder.sh:/builder.sh:ro
       - /var/run/docker.sock:/var/run/docker.sock
     command: "crond -f -l 2"
