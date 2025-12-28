@@ -11,7 +11,13 @@ fi
 rebuild_image() {
 	# Obtain image name
 	name=$(basename $1)
-	echo Building $name
+
+	if [ -d "$1/.git" ]
+		echo Found git repositry, performing pull…
+		git -C "$1" pull --rebase
+	fi
+
+	echo Building ${name}…
 
 	docker build --pull ${REGISTRY_HOST:+--push} -t "${REGISTRY_HOST:+$REGISTRY_HOST/}$name" "$1"
 }
