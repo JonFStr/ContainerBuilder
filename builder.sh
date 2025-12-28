@@ -17,11 +17,11 @@ rebuild_image() {
 		git -C "$1" pull --rebase
 	fi
 
-	args_file="$(realpath "$1")/../${name}.args"
+	args_file="$(realpath "$1")/../${name}.args.sh"
 	build_args=""
 	if [ -f "$args_file" ]; then
 		echo Found build arguments in "$args_file", loading…
-		build_args="$(cat "$args_file" | tr -s '\n' ' ')"
+		build_args="$(cd "$1" && sh "$args_file" | tr -s '\n' ' ')"
 	fi
 
 	echo Building ${name}…
