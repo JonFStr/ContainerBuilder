@@ -10,16 +10,22 @@ fi
 
 rebuild_image() {
 	# Obtain image name
-	name=$(basename $1)
+	name=$(basename "$1")
 
-	if [ -d "$1/.git" ]
+	if [ -d "$1/.git" ]; then
 		echo Found git repositry, performing pull…
 		git -C "$1" pull --rebase
 	fi
 
-	echo Building ${name}…
+	args_file="$(realpath "$1")/../${name}.args"
+	build_args=""
+	if [ -f "$args_file" ]; then
+		echo Found build arguments in "$args_file", loading…
+		build_args="$(cat "$args_file" | tr -s '\n' ' ')"
+	fi
 
-	docker build --pull ${REGISTRY_HOST:+--push} -t "${REGISTRY_HOST:+$REGISTRY_HOST/}$name" "$1"
+	echo Building ${name}…
+	docker build --pull ${REGISTRY_HOST:+--push} -t "${REGISTRY_HOST:+$REGISTRY_HOST/}$name" ${build_args} "$1"
 }
 
 for dir in ./*/ ; do
