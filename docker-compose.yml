@@ -1,6 +1,7 @@
 services:
   builder:
     image: docker:cli
+    init: true
     restart: always
     environment:
       REGISTRY_HOST:
